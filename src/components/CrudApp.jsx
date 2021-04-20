@@ -39,12 +39,15 @@ const CrudApp = () => {
 		data.id = Date.now()
 		setDb([...db, data])
 	}
-	const updateData = data => {}
+	const updateData = data => {
+		let newData = db.map(el => (el.id === data.id ? data : el))
+		setDb(newData)
+	}
 	const deleteData = id => {}
 
 	return (
 		<div>
-			<h3>Crud APP</h3>
+			<h3>{dataToEdit ? 'Editar' : 'Agregar'}</h3>
 			<CrudForm
 				createData={createData}
 				updateData={updateData}

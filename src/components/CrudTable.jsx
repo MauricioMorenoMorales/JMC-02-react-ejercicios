@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CrudTable = ({ data }) => {
+const CrudTable = ({ data, setDataToEdit, deleteData }) => {
 	return (
 		<div>
 			<h3>Tabla de Datos</h3>
@@ -23,8 +23,8 @@ const CrudTable = ({ data }) => {
 								<th>{e.name}</th>
 								<th>{e.constellation}</th>
 								<th>
-									<button>Editar</button>
-									<button>Eliminar</button>
+									<button onClick={() => setDataToEdit(e)}>Editar</button>
+									<button onClick={() => deleteData(e.id)}>Eliminar</button>
 								</th>
 							</tr>
 						))
