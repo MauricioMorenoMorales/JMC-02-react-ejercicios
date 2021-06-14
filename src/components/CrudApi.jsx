@@ -3,50 +3,30 @@ import { helpHttp } from '../helpers/helpHttp';
 
 import CrudForm from './CrudForm';
 import CrudTable from './CrudTable';
-
-const initialDb = [
-	{
-		id: 1,
-		name: 'Seiya',
-		constellation: 'Pegaso',
-	},
-	{
-		id: 2,
-		name: 'Shiryu',
-		constellation: 'Dragón',
-	},
-	{
-		id: 3,
-		name: 'Hyoga',
-		constellation: 'Cisne',
-	},
-	{
-		id: 4,
-		name: 'Shun',
-		constellation: 'Andromeda',
-	},
-	{
-		id: 5,
-		name: 'Ikki',
-		constellation: 'Fenix',
-	},
-];
+import Loader from './Loader';
+import Message from './Message';
 
 const CrudApi = () => {
-	const [db, setDb] = useState([]);
+	const [db, setDb] = useState(null);
 	const [dataToEdit, setDataToEdit] = useState(null);
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
 
 	let api = helpHttp();
 	let url = 'http://localhost:3333/santos';
 
 	useEffect(() => {
+		setLoading(true);
 		api.get(url).then(res => {
 			if (!res.err) {
 				setDb(res);
+				setError(null);
 			} else {
-				setDb([]);
+				setDb(null);
+				setError(res);
 			}
 		});
+		setLoading(false);
 	}, []);
 
 	const createData = data => {
@@ -72,18 +52,24 @@ const CrudApi = () => {
 	return (
 		<div>
 			<h2>CRUD API</h2>
-			<h3>{dataToEdit ? 'Editar' : 'Agregar'}</h3>
-			<CrudForm
-				createData={createData}
-				updateData={updateData}
-				dataToEdit={dataToEdit}
-				setDataToEdit={setDataToEdit}
-			/>
-			<CrudTable
-				data={db}
-				setDataToEdit={setDataToEdit}
-				deleteData={deleteData}
-			/>
+			<article className="grid-1-2">
+				<h3>{dataToEdit ? 'Editar' : 'Agregar'}</h3>
+				<CrudForm
+					createData={createData}
+					updateData={updateData}
+					dataToEdit={dataToEdit}
+					setDataToEdit={setDataToEdit}
+				/>
+				{loading && <Loader />}
+				{error && <Message />}
+				{db && (
+					<CrudTable
+						data={db}
+						setDataToEdit={setDataToEdit}
+						deleteData={deleteData}
+					/>
+				)}
+			</article>
 		</div>
 	);
 };
