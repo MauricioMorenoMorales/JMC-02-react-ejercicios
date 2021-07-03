@@ -3,7 +3,7 @@ export const helpHttp = () => {
 		const defaultHeaders = {
 			accept: 'application/json',
 		};
-
+		//This code adds parameters to the options parameter
 		const controller = new AbortController();
 		options.signal = controller.signal;
 		options.method = options.method || 'GET';
@@ -14,7 +14,7 @@ export const helpHttp = () => {
 
 		if (!options.body) delete options.body;
 		console.log(options);
-		setTimeout(() => controller.abort, 3000);
+		setTimeout(() => controller.abort(), 3000);
 
 		return fetch(endpoint, options)
 			.then(res =>
