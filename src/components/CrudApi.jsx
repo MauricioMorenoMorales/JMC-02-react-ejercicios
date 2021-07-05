@@ -7,10 +7,10 @@ import Loader from './Loader';
 import Message from './Message';
 
 const CrudApi = () => {
-	const [db, setDb] = useState(null);
-	const [dataToEdit, setDataToEdit] = useState(null);
-	const [error, setError] = useState(null);
-	const [loading, setLoading] = useState(false);
+	const [db, setDb] = useState(null),
+		[dataToEdit, setDataToEdit] = useState(null),
+		[error, setError] = useState(null),
+		[loading, setLoading] = useState(false);
 
 	let api = helpHttp();
 	let url = 'http://localhost:3333/santos';
@@ -18,6 +18,7 @@ const CrudApi = () => {
 	useEffect(() => {
 		setLoading(true);
 		api.get(url).then(res => {
+			console.log(res);
 			if (!res.err) {
 				setDb(res);
 				setError(null);
