@@ -10,25 +10,26 @@ const CrudApi = () => {
 	const [db, setDb] = useState(null),
 		[dataToEdit, setDataToEdit] = useState(null),
 		[error, setError] = useState(null),
-		[loading, setLoading] = useState(false);
+		[loading, setLoading] = useState(true);
 
-	let api = helpHttp();
 	let url = 'http://localhost:3333/santos';
 
 	useEffect(() => {
 		setLoading(true);
-		api.get(url).then(res => {
-			console.log(res);
-			if (!res.err) {
-				setDb(res);
-				setError(null);
-			} else {
-				setDb(null);
-				setError(res);
-			}
-		});
+		helpHttp()
+			.get(url)
+			.then(res => {
+				console.log(res);
+				if (!res.err) {
+					setDb(res);
+					setError(null);
+				} else {
+					setDb(null);
+					setError(res);
+				}
+			});
 		setLoading(false);
-	}, []);
+	}, [url]);
 
 	const createData = data => {
 		data.id = Date.now();
@@ -62,7 +63,12 @@ const CrudApi = () => {
 					setDataToEdit={setDataToEdit}
 				/>
 				{loading && <Loader />}
-				{error && <Message />}
+				{error && (
+					<Message
+						message={`Error ${error.status}: ${error.statusText}`}
+						backgroundColor="#dc3545"
+					/>
+				)}
 				{db && (
 					<CrudTable
 						data={db}
