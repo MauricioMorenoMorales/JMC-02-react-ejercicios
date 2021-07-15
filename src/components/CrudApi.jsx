@@ -38,20 +38,24 @@ const CrudApi = () => {
 		const options = {
 			body: data,
 			headers: { 'content-type': 'application/json' },
-		}; //!||
-		api.post(url, options).then(response => {
-			console.log(response);
-			if (!response.err) {
-				setDb([...db, response]);
+		};
+
+		api.post(url, options).then(fetchResponse => {
+			console.log(fetchResponse);
+			if (!fetchResponse.err) {
+				setDb([...db, fetchResponse]);
 			} else {
-				setError(response);
+				setError(fetchResponse);
 			}
 		});
+
 		setDb([...db, data]);
 	}; //!||
 	const updateData = data => {
-		let newData = db.map(el => (el.id === data.id ? data : el));
-		setDb(newData);
+		const endPoint = `${url}/${data.id}`;
+		console.log(endPoint);
+		// let newData = db.map(el => (el.id === data.id ? data : el));
+		// setDb(newData);
 	}; //!||
 	const deleteData = id => {
 		let isDelete = window.confirm(
