@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import CrudForm from './CrudForm'
-import CrudTable from './CrudTable'
+import CrudForm from './CrudForm';
+import CrudTable from './CrudTable';
 
 const initialDb = [
 	{
@@ -29,34 +29,36 @@ const initialDb = [
 		name: 'Ikki',
 		constellation: 'Fenix',
 	},
-]
+];
 
 const CrudApp = () => {
-	const [db, setDb] = useState(initialDb)
-	const [dataToEdit, setDataToEdit] = useState(null)
+	const [db, setDb] = useState(initialDb);
+	const [dataToEdit, setDataToEdit] = useState(null);
 
 	const createData = data => {
-		data.id = Date.now()
-		setDb([...db, data])
-	}
+		data.id = Date.now();
+		setDb([...db, data]);
+	};
 	const updateData = data => {
-		let newData = db.map(el => (el.id === data.id ? data : el))
-		setDb(newData)
-	}
+		let newData = db.map(el => (el.id === data.id ? data : el));
+		setDb(newData);
+	};
 	const deleteData = id => {
 		let isDelete = window.confirm(
 			`¿Estás seguro de eliminar el registro con el id? ${id}`,
-		)
+		);
 		if (isDelete) {
-			let newData = db.filter(el => el.id !== id)
-			setDb(newData)
+			let newData = db.filter(el => el.id !== id);
+			setDb(newData);
 		} else {
-			return
+			return;
 		}
-	}
+	};
 
 	return (
 		<div>
+			<br />
+			<h2>Crud App</h2>
 			<h3>{dataToEdit ? 'Editar' : 'Agregar'}</h3>
 			<CrudForm
 				createData={createData}
@@ -70,7 +72,7 @@ const CrudApp = () => {
 				deleteData={deleteData}
 			/>
 		</div>
-	)
-}
+	);
+};
 
-export default CrudApp
+export default CrudApp;

@@ -1,44 +1,47 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
 const initialForm = {
 	name: '',
 	constellation: '',
 	id: null,
-}
+};
 
 const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
-	const [form, setForm] = useState(initialForm)
+	const [form, setForm] = useState(initialForm); //This data fills the form state
+	//Fills the form with the information to edit when setData to edit is changed on <CrudTable />
 	useEffect(() => {
 		if (dataToEdit) {
-			setForm(dataToEdit)
+			setForm(dataToEdit);
 		} else {
-			setForm(initialForm)
+			setForm(initialForm);
 		}
-	}, [dataToEdit])
-	const handleChange = e => {
+	}, [dataToEdit]);
+
+	const handleChange = event => {
 		setForm({
 			...form,
-			[e.target.name]: e.target.value,
-		})
-	}
-	const handleSubmit = e => {
-		e.preventDefault()
+			[event.target.name]: event.target.value,
+		});
+	};
+	const handleSubmit = event => {
+		event.preventDefault();
 		if (!form.name || !form.constellation) {
-			alert('Datos incompletos')
-			return
+			alert('Datos incompletos');
+			return;
 		}
+		//If an id is sended from <CrudTable /> will be updated new data
 		if (form.id === null) {
-			createData(form)
+			createData(form);
 		} else {
-			updateData(form)
+			updateData(form);
 		}
 
-		handleReset()
-	}
-	const handleReset = e => {
-		setForm(initialForm)
-		setDataToEdit(null)
-	}
+		handleReset();
+	};
+	const handleReset = () => {
+		setForm(initialForm);
+		setDataToEdit(null);
+	};
 
 	return (
 		<div>
@@ -61,7 +64,7 @@ const CrudForm = ({ createData, updateData, dataToEdit, setDataToEdit }) => {
 				<input type="reset" value="Limpiar" onClick={handleReset} />
 			</form>
 		</div>
-	)
-}
+	);
+};
 
-export default CrudForm
+export default CrudForm;
