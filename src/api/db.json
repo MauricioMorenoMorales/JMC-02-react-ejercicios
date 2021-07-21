@@ -1,39 +1,29 @@
 {
-	"santos": [
-		{
-			"id": 1,
-			"name": "Seiya",
-			"constellation": "Pegaso"
-		},
-		{
-			"id": 2,
-			"name": "Shiryu",
-			"constellation": "Dragón"
-		},
-		{
-			"id": 3,
-			"name": "Hyoga",
-			"constellation": "Cisne"
-		},
-		{
-			"id": 4,
-			"name": "Shun",
-			"constellation": "Andromeda"
-		},
-		{
-			"id": 5,
-			"name": "Ikki",
-			"constellation": "Fenix"
-		},
-		{
-			"name": "xd",
-			"constellation": "2",
-			"id": 1626363136070
-		},
-		{
-			"name": "Jon mircha",
-			"constellation": "Geminis",
-			"id": 1626363670393
-		}
-	]
+  "santos": [
+    {
+      "id": 1,
+      "name": "Seiya",
+      "constellation": "Pegaso"
+    },
+    {
+      "id": 2,
+      "name": "Shiryu",
+      "constellation": "Dragón"
+    },
+    {
+      "id": 3,
+      "name": "Hyoga",
+      "constellation": "Cisne"
+    },
+    {
+      "id": 4,
+      "name": "Shun",
+      "constellation": "Andromeda"
+    },
+    {
+      "id": 5,
+      "name": "Ikki",
+      "constellation": "Fenix"
+    }
+  ]
 }

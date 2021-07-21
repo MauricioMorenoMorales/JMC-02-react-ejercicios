@@ -53,16 +53,39 @@ const CrudApi = () => {
 	}; //!||
 	const updateData = data => {
 		const endPoint = `${url}/${data.id}`;
-		console.log(endPoint);
-		// let newData = db.map(el => (el.id === data.id ? data : el));
-		// setDb(newData);
+		const options = {
+			body: data,
+			headers: { 'content-type': 'application/json' },
+		};
+		api.put(endPoint, options).then(postResponse => {
+			if (!postResponse.err) {
+				let newData = db.map(element =>
+					element.id === data.id ? data : element,
+				);
+				setDb(newData);
+			} else {
+				setError(postResponse);
+			}
+		});
 	}; //!||
 	const deleteData = id => {
 		let isDelete = window.confirm(
 			`¿Estás seguro de eliminar el registro con el id? ${id}`,
 		);
 		if (isDelete) {
-			let newData = db.filter(el => el.id !== id);
+			const endPoint = `${url}/${id}`;
+			const options = {
+				headers: { 'content-type': 'application/json' },
+			};
+			api.del(endPoint, options).then(deleteResponse => {
+				if (!deleteResponse.err) {
+					const newData = db.filter(element => element.id !== id);
+					setDb(newData);
+				} else {
+					setError(deleteResponse);
+				}
+			});
+			let newData = db.filter(element => element.id !== id);
 			setDb(newData);
 		} else {
 			return;

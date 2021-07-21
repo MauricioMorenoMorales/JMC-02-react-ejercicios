@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const CrudTable = ({ data, setDataToEdit, deleteData }) => {
 	return (
@@ -13,11 +13,7 @@ const CrudTable = ({ data, setDataToEdit, deleteData }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{data.length === 0 ? (
-						<tr>
-							<td colSpan="3">Sin datos</td>
-						</tr>
-					) : (
+					{data.length > 0 ? (
 						data.map(e => (
 							<tr key={e.id}>
 								<th>{e.name}</th>
@@ -28,11 +24,15 @@ const CrudTable = ({ data, setDataToEdit, deleteData }) => {
 								</th>
 							</tr>
 						))
+					) : (
+						<tr>
+							<td colSpan="3">Sin datos</td>
+						</tr>
 					)}
 				</tbody>
 			</table>
 		</div>
-	)
-}
+	);
+};
 
-export default CrudTable
+export default CrudTable;
