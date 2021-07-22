@@ -85,7 +85,7 @@ const CrudApi = () => {
 					setError(deleteResponse);
 				}
 			});
-			let newData = db.filter(element => element.id !== id);
+			const newData = db.filter(element => element.id !== id);
 			setDb(newData);
 		} else {
 			return;
