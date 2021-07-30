@@ -18,19 +18,26 @@ const SongSearch = () => {
 		const fetchData = async function () {
 			const { artist, song } = search;
 
-			const artistUrl = `https://www.theaudiodb.com/api/v1/json/1/search.php?s=${artist}`;
-			const songUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`;
+			const artistUrl =
+				`https://www.theaudiodb.com/api/v1/json/1/search.php?s=${artist}`.replace(
+					' ',
+					'%20',
+				);
+			// const songUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`.replace(
+			// 	' ',
+			// 	'%20',
+			// );
 
 			console.log(artistUrl, songUrl);
 
 			setLoading(true);
-			const [artistResponse, songResponse] = Promise.all([
+			const [artistResponse, songResponse] = await Promise.all([
 				helpHttp().get(artistUrl),
-				helpHttp().get(songUrl),
+				// helpHttp().get(songUrl),
 			]);
 			console.log(artistResponse, songResponse);
 			setBio(artistResponse);
-			setLyric(songResponse);
+			// setLyric(songResponse);
 			setLoading(true);
 		};
 
