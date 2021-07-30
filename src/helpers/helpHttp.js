@@ -28,6 +28,7 @@ export const helpHttp = () => {
 			)
 			.catch(err => err);
 	};
+	//These are the crud methods
 	const get = (url, options = {}) => customFetch(url, options);
 	const post = (url, options = {}) => {
 		options.method = 'POST';
