@@ -1,9 +1,13 @@
 import React from 'react';
+import Message from './Message'
 
 const SongDetails = ({ search, lyric, bio }) => {
+	if(!lyric || !bio) return null
+
 	return (
 		<div>
 			<h2>Detalles</h2>
+			<Message />
 			<div className="song-artist">
 				<h2>Información Artista</h2>
 			</div>

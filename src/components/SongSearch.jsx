@@ -23,10 +23,10 @@ const SongSearch = () => {
 					' ',
 					'%20',
 				);
-			// const songUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`.replace(
-			// 	' ',
-			// 	'%20',
-			// );
+			const songUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`.replace(
+				' ',
+				'%20',
+			);
 
 			console.log(artistUrl, songUrl);
 
@@ -38,7 +38,7 @@ const SongSearch = () => {
 			console.log(artistResponse, songResponse);
 			setBio(artistResponse);
 			// setLyric(songResponse);
-			setLoading(true);
+			setLoading(false);
 		};
 
 		fetchData();
@@ -53,7 +53,9 @@ const SongSearch = () => {
 			<h2>SongSearch</h2>
 			{loading && <Loader />}
 			<SongForm handleSearch={handleSearch} />
-			<SongDetails search={search} bio={bio} lyric={lyric} />
+			{search && !loading && (
+				<SongDetails search={search} bio={bio} lyric={lyric} />
+			)}
 		</div>
 	);
 };
