@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+
+//Helpers
 import { helpHttp } from '../helpers/helpHttp';
+
+// Components
 import Loader from './Loader';
 import SongDetails from './SongDetails';
 import SongForm from './SongForm';
 
 const SongSearch = () => {
+	//States
 	const [search, setSearch] = useState(null);
 	const [lyric, setLyric] = useState(null);
 	const [bio, setBio] = useState(null);
@@ -14,30 +19,29 @@ const SongSearch = () => {
 	useEffect(() => {
 		if (search === null) return;
 		console.log(search);
-
+		//Obtiene la información
 		const fetchData = async function () {
 			const { artist, song } = search;
-
 			const artistUrl =
 				`https://www.theaudiodb.com/api/v1/json/1/search.php?s=${artist}`.replace(
 					' ',
 					'%20',
 				);
-			const songUrl = `https://api.lyrics.ovh/v1/${artist}/${song}`.replace(
-				' ',
-				'%20',
-			);
-
+			const songUrl =
+				`https://www.theaudiodb.com/api/v1/json/1/search.php?s=${song}`.replace(
+					' ',
+					'%20',
+				);
 			console.log(artistUrl, songUrl);
 
 			setLoading(true);
 			const [artistResponse, songResponse] = await Promise.all([
 				helpHttp().get(artistUrl),
-				// helpHttp().get(songUrl),
+				helpHttp().get(songUrl),
 			]);
-			console.log(artistResponse, songResponse);
+			console.log(artistResponse, '>>>>', songResponse);
 			setBio(artistResponse);
-			// setLyric(songResponse);
+			setLyric(songResponse);
 			setLoading(false);
 		};
 
@@ -51,6 +55,10 @@ const SongSearch = () => {
 	return (
 		<div>
 			<h2>SongSearch</h2>
+			<p>
+				Solamente funcionara buscando 2 bandas, no funciona la api de lyric la
+				cual es lo mismo, una banda
+			</p>
 			{loading && <Loader />}
 			<SongForm handleSearch={handleSearch} />
 			{search && !loading && (
