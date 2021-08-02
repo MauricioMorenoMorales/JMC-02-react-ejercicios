@@ -10,7 +10,7 @@ const SelectsAnidados = () => {
 			<h2>Selects Anidados</h2>
 			<h3>México</h3>
 			<SelectList
-				title="estados"
+				title="estado"
 				url=""
 				handleChange={event => {
 					setState(event.target.value);
@@ -27,7 +27,7 @@ const SelectsAnidados = () => {
 			)}
 			{town && (
 				<SelectList
-					title="colonias"
+					title="colonia"
 					url=""
 					handleChange={event => {
 						setSuburb(event.target.value);
