@@ -54,7 +54,7 @@ const SongSearch = () => {
 
 	return (
 		<div>
-			<h2>SongSearch</h2>
+			<h2>Probando esta wea</h2>
 			<p>
 				Solamente funcionara buscando 2 bandas, no funciona la api de lyric la
 				cual es lo mismo, una banda
