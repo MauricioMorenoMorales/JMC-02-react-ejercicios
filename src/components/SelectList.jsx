@@ -6,7 +6,6 @@ import Message from './Message';
 
 const SelectList = ({ title, url, handleChange }) => {
 	const { data, error, loading } = useFetch(url);
-	console.log(data, error, loading);
 
 	if (!data) return null;
 	if (error)
@@ -21,7 +20,6 @@ const SelectList = ({ title, url, handleChange }) => {
 	const label = title.charAt(0).toUpperCase() + title.slice(1),
 		singularTitle = title.replace(/s\b/, '');
 	const options = data.response[title];
-	console.log(options)
 
 	return (
 		<>
