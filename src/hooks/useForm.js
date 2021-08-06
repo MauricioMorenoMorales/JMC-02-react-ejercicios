@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { helpHttp } from '../helpers/helpHttp';
 
 export const useForm = function (initialForm, validateForm) {
 	const [form, setForm] = useState(initialForm);
@@ -17,7 +18,29 @@ export const useForm = function (initialForm, validateForm) {
 		handleChange(event);
 		setErrors(validateForm(form));
 	};
-	const handleSubmit = event => {};
+	const handleSubmit = event => {
+		event.preventDefault();
+		setErrors(validateForm(form));
+
+		if (Object.keys(errors).length === 0) {
+			setLoading(true);
+			helpHttp()
+				.post('https://formsubmit.co/el/xuduta', {
+					body: form,
+					headers: {
+						'Content-Type': 'application/json',
+						Accept: 'application/json',
+					},
+				})
+				.then(postResponse => {
+					setLoading(false);
+					setResponse(true);
+					setForm(initialForm);
+					setTimeout(() => setResponse(false), 6000);
+				})
+				.catch(console.log);
+		} else return;
+	};
 
 	return {
 		form,
